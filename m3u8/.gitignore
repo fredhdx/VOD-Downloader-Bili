@@ -1,0 +1,11 @@
+*.pyc
+*.egg-info
+tests/server.stdout
+dist/
+build/
+bin/
+include/
+lib/
+local/
+.coverage
+.cache
