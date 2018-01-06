@@ -16,6 +16,7 @@ Bilibili_API = {'search':'https://search.bilibili.com/all?keyword=%(_keyword)s&p
         'info':'interface.bilibili.com/player?id=cid:%(_cid)s&aid=%(_aid)s', \
         'archive':'api.bilibili.com/archive_stat/stat?aid=%(_aid)s', \
         'replyList':'http://api.bilibili.cn/feedback?aid=%(_aid)s',\
-        'reply':'api.bilibili.com/x/reply?jsonp=jsonp&type=1&sort=0&pn=%(_pn)s&nohot=%(_nohot)s&oid=%(_aid)s'}
+        'reply':'api.bilibili.com/x/reply?jsonp=jsonp&type=1&sort=0&pn=%(_pn)s&nohot=%(_nohot)s&oid=%(_aid)s', \
+        'tag': 'https://api.bilibili.com/x/tag/archive/tags?&aid=%(_aid)s'}
 
 SNH_API = {'live':'http://live.snh48.com'}
