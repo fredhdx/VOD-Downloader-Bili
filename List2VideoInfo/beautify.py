@@ -77,7 +77,7 @@ def make_soup(url,port_csv, vlist):
     if playlist_videos: # check a video list or single video
         for _video in playlist_videos:
             ptitle = _video.contents[0][2:]
-            link = 'www.bilibili.com' + _video.get('value')
+            link = 'https://www.bilibili.com' + _video.get('value')
             cid = _video.get('cid')
             item = Vpiece(vtitle, ptitle, aid, cid, link, count)
 
