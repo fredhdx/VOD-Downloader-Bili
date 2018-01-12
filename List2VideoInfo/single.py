@@ -36,7 +36,7 @@ def make_soup(url):
         print("Video List")
         for _video in playlist_videos:
             ptitle = _video.contents[0][2:]
-            link = 'www.bilibili.com' + _video.get('value')
+            link = 'https://www.bilibili.com' + _video.get('value')
             cid = _video.get('cid')
 
             outline = '  ' + vtitle + '\n' + ptitle + '\n' + str(aid) + '\n' + str(cid) + '\n' + link
