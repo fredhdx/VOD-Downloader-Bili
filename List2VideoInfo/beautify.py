@@ -149,6 +149,23 @@ def write_vlist_csv_key(fn,vlist,key, exclude=0):
 
     fo.close()
 
+def write_md(fn,vlist):
+    fo = open(fn,'w')
+    if not vlist:
+        print("write_md: error: vlist empty")
+    else:
+        title = ""
+        for v in vlist:
+            if v.getid() == 0:
+                title = v.getvtitle()
+                fo.write('\n[' + title + ' ' + v.getptitle() + ']' + '(' + v.getlink() + ')\n')
+            else:
+                fo.write('[' + title + ' ' + v.getptitle() + ']' + '(' + v.getlink() + ')\n')
+
+    # move output file to save location
+    os.rename(DIRECTORY + '/' + fn, SAVE_DIRECTORY + '/' + fn)
+    fo.close()
+
 def main(argv):
     try:
        opts, args = getopt.getopt(argv,"hi:",["ifile="])
@@ -190,6 +207,7 @@ def main(argv):
        write_vlist_csv(outputfile,vlist)
        write_vlist_csv_key(outputfile,vlist,"MC",exclude=0)
        write_vlist_csv_key(outputfile,vlist,"MC",exclude=1)
+       write_md("md_list.md",vlist)
     fo.close()
 
     os.rename(DIRECTORY + '/' + outputfile + '.csv', SAVE_DIRECTORY + '/' + outputfile + '.csv')
