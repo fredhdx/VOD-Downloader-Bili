@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import codecs
 import re
@@ -6,6 +7,7 @@ import sys, getopt, os
 import requests
 from bs4 import BeautifulSoup
 import csv
+import shutil
 
 # prepare save DIRECTORY
 DIRECTORY = os.getcwd()
@@ -114,8 +116,9 @@ def write_vlist_csv(fn,vlist):
                 port_csv.writerow(['',v.getptitle(),v.getlink(),v.getaid(),v.getcid()])
 
     # move output file to save location
-    os.rename(DIRECTORY + '/' + fn + '2.csv', SAVE_DIRECTORY + '/' + fn + '2.csv')
     fo.close()
+    shutil.move(DIRECTORY + '/' + fn + '2.csv', SAVE_DIRECTORY + '/' + fn + '2.csv')
+
 
 # write to csv with keyword: exclude mode available
 def write_vlist_csv_key(fn,vlist,key, exclude=0):
@@ -145,9 +148,10 @@ def write_vlist_csv_key(fn,vlist,key, exclude=0):
                 extitle = vtitle
 
     # move output file to save location
-    os.rename(DIRECTORY + '/' + outname, SAVE_DIRECTORY + '/' + outname)
-
     fo.close()
+    shutil.move(DIRECTORY + '/' + outname, SAVE_DIRECTORY + '/' + outname)
+
+
 
 def write_md(fn,vlist):
     fo = open(fn,'w')
@@ -163,8 +167,9 @@ def write_md(fn,vlist):
                 fo.write('[' + title + ' ' + v.getptitle() + ']' + '(' + v.getlink() + ')\n')
 
     # move output file to save location
-    os.rename(DIRECTORY + '/' + fn, SAVE_DIRECTORY + '/' + fn)
     fo.close()
+    shutil.move(DIRECTORY + '/' + fn, SAVE_DIRECTORY + '/' + fn)
+
 
 def main(argv):
     try:
@@ -188,6 +193,7 @@ def main(argv):
     port_csv = csv.writer(fo)
     port_csv.writerow(['title','p-title','link','aid', 'cid'])
 
+    global SAVE_DIRECTORY
     try:
         os.stat(SAVE_DIRECTORY)
     except:
@@ -210,7 +216,10 @@ def main(argv):
        write_md("md_list.md",vlist)
     fo.close()
 
-    os.rename(DIRECTORY + '/' + outputfile + '.csv', SAVE_DIRECTORY + '/' + outputfile + '.csv')
+    shutil.move(DIRECTORY + '/' + outputfile + '.csv', SAVE_DIRECTORY + '/' + outputfile + '.csv')
+
+    print("Finished. If you are using Windows + Excel, please set Options->Language->Chinese as default.")
+    print("转码完毕。如果您使用Windows系统并用Excel打开csv, 请更改选项->语言->中文为默认语言。")
 
 if __name__ == '__main__':
     main(sys.argv[1:])
