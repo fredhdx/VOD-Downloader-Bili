@@ -288,6 +288,7 @@ if __name__ == '__main__':
     numPages = int(content_json['pageinfo']['video']['pages'])
 
     print("循环上界：" + str(numPages))
+    print("共%d项结果" % numResults)
     input("输入任意键开始...")
 
     if (SAVE_IMAGE == '1'):
@@ -321,7 +322,7 @@ if __name__ == '__main__':
             print("解析第%d页出现问题 status_code:%d" % {i, status_code})
             sys.exit(1)
 
-        content_json = q.json()
+        content_json = r.json()
         for j in range(1, len(content_json['result']['video']) + 1):
 
             # 获取每个视频数据
@@ -347,7 +348,7 @@ if __name__ == '__main__':
 
             description = remove_nbws(item_json['description']) # 简介
 
-            author = remove_nbws(item_json['author']) # 作者
+            author = item_json['author'] # 作者
             mid = str(item_json['mid']) # 作者ID
             upspace = SPACE_API + str(mid) # 作者空间
 
